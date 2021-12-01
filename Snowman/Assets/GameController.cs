@@ -11,11 +11,21 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Text Message;
     public UnityEngine.UI.Button StartButton;
     private WordGuesser.WordGame guessingGame;
+        public UnityEngine.UI.Text Info;
+ public UnityEngine.UI.Text GetWord;
+
+ public UnityEngine.UI.Text GetGuessedLetters;
+
+
+
     public void SubmitGuess()
     {
         
         string result = this.guessingGame.CheckGuess(PlayerGuess.text);
         Debug.Log(result);
+        Info.text = result;
+        GetWord.text = this.guessingGame.GetWord();
+        GetGuessedLetters.text = this.guessingGame.GetGuessedLetters();
     }
     
     public void StartGame()
