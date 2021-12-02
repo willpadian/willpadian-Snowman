@@ -11,11 +11,11 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Text Message;
     public UnityEngine.UI.Button StartButton;
     private WordGuesser.WordGame guessingGame;
-        public UnityEngine.UI.Text Info;
- public UnityEngine.UI.Text GetWord;
-
- public UnityEngine.UI.Text GetGuessedLetters;
-
+    public UnityEngine.UI.Text Info;
+    public UnityEngine.UI.Text GetWord;
+    public UnityEngine.UI.Text GuessesRemaining;
+    public UnityEngine.UI.Text GetGuessedLetters;
+    public UnityEngine.UI.Text InfoAfterGuess;
 
 
     public void SubmitGuess()
@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
         Info.text = result;
         GetWord.text = this.guessingGame.GetWord();
         GetGuessedLetters.text = this.guessingGame.GetGuessedLetters();
+        GuessesRemaining.text = $"{this.guessingGame.GetGuessLimit() - this.guessingGame.GetIncorrectGuesses()}";
+        InfoAfterGuess.text = this.guessingGame.CheckGuess(PlayerGuess.text);
     }
     
     public void StartGame()
@@ -50,3 +52,20 @@ public class GameController : MonoBehaviour
         PlayScreen.SetActive(false);
     }
 } 
+
+public void isGameOver()
+{
+    this.StartScreen.SetActive(false);
+    this.PlayScreen.SetActive(false);
+    this.GameOver.SetActive(true);
+    this.GameWon.SetActive(false);
+    CorrectWord.text = this.guessingGame.GetWord();
+}
+
+public void isGameWon()
+{
+    this.StartScreen.SetActive(false);
+    this.PlayScreen.SetActive(false);
+    this.GameOver.SetActive(false);
+    this.GameWon.SetActive(true);
+}
